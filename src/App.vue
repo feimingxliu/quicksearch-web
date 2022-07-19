@@ -14,12 +14,13 @@ export default {
     async fetchIndices(show) {
       if (show) {
         let indices = await getIndices()
+        indices.push("*")
         this.options = indices
       }
     },
     indexChange(index) {
       this.currentIndex = index
-      console.log(this.currentIndex)
+      console.log(`current index: ${this.currentIndex}`)
     },
   },
 }
