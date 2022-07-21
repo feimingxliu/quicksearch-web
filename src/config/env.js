@@ -1,5 +1,5 @@
 
-let baseUrl = 'http://localhost:9200/'
+let baseUrl = '/'
 
 // `VITE_BASE_URL` is custom defined env, not `BASE_URL`.
 if (import.meta.env.VITE_BASE_URL) {
