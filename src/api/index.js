@@ -1,5 +1,14 @@
 import fetch from './fetch'
 
+async function login(username, password) {
+    let form = {
+        username,
+        password
+    }
+    let res = await fetch('_user/login', form, 'POST')
+    return res
+}
+
 async function getIndices() {
     let indices = await fetch(`_all`)
     return indices.map(index => index.name)
@@ -26,6 +35,7 @@ async function search(index, query, from, size) {
 }
 
 export {
+    login,
     getIndices,
-    search
+    search,
 }

@@ -16,6 +16,9 @@ export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
 		}
 	}
 
+	let username = window.sessionStorage.getItem('quicksearch_username')
+	let password = window.sessionStorage.getItem('quicksearch_password')
+
 	if (window.fetch && method == 'fetch') {
 		let requestConfig = {
 			method: type,
@@ -33,8 +36,15 @@ export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
 			})
 		}
 
+		if (username && password) {
+			requestConfig.headers['Authorization'] = 'Basic ' + btoa(username + ":" + password)
+		}
+
 		try {
 			const response = await fetch(url, requestConfig);
+			if (response.status !== 200) {
+				throw new Error(response.status + ' ' + response.statusText);
+			}
 			const responseJson = await response.json();
 			return responseJson
 		} catch (error) {
@@ -56,6 +66,9 @@ export default async (url = '', data = {}, type = 'GET', method = 'fetch') => {
 
 			requestObj.open(type, url, true);
 			requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			if (username && password) {
+				requestObj.setRequestHeader("Authorization", 'Basic ' + btoa(username + ":" + password))
+			}
 			requestObj.send(sendData);
 
 			requestObj.onreadystatechange = () => {
