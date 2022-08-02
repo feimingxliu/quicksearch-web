@@ -1,8 +1,11 @@
 <script>
 import { login, getIndices, search } from '../api/index'
-import { ElMessage } from 'element-plus'
+import { ElDialog, ElForm, ElFormItem, ElButton, ElRow, ElCol, ElSelect, ElOption, ElInput, ElMessage } from 'element-plus'
 
 export default {
+  components: {
+    ElDialog, ElForm, ElFormItem, ElButton, ElRow, ElCol, ElSelect, ElOption, ElInput,
+  },
   data() {
     return {
       loginVisible: false,
